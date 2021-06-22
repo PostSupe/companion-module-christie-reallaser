@@ -10,8 +10,8 @@
 	"manufacturer": "Christie",
 	"product": "Projector",
 	"shortname": "ChrRGBLsr",
-	"homepage": "https://www.christiedigital.com/en-us/business/products/projectors",
-	"description": "Module to control Christie RGB Laser Projectors",
+	"homepage": "https://www.christiedigital.com/solutions/cinema/reallaser/",
+	"description": "Module to control Christie RGB Laser Cinema Projectors",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
