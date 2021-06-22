@@ -1,4 +1,4 @@
-# companion-module-christie-reallaser
+# companion-module-christie-rgblaser
 A Bitfocus Companion Module offering Serial Control over TCP for the latest Christie RGB Laser Projectors
 
 ***v0.0.1***
