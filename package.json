@@ -1,21 +1,21 @@
 
 {
-	"name": "christie-laser",
+	"name": "christie-rgblaser",
 	"legacy": [
-		"chrlaserpj"
+		"chrsrgblsr"
 	],
 	"version": "0.0.1",
 	"api_version": "1.0.0",
 	"keywords": ["Projectors"],
 	"manufacturer": "Christie",
 	"product": "Projector",
-	"shortname": "ChrLsrPrj",
+	"shortname": "ChrRGBLsr",
 	"homepage": "https://www.christiedigital.com/en-us/business/products/projectors",
-	"description": "Module to conntrol Christie RGB Laser Projectors",
+	"description": "Module to control Christie RGB Laser Projectors",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"author": "Based on Per Røine <per.roine@gmail.com> & Andreas Thomsen <mc-hauge@hotmail.com>",
+	"author": "Based HEAVILY on Per Røine <per.roine@gmail.com> & Andreas Thomsen <mc-hauge@hotmail.com>",
 	"license": "MIT"
 }
