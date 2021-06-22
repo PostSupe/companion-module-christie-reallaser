@@ -21,8 +21,8 @@ This effort is deeply indebted to the work already done for older projectors in 
 
 ## TO DO
 
-- [x] Create New Repo following correct mnaming convention
-- [x] Create Package json file desribing the project accurately
+- [x] Create New Repo following correct bitfocus naming convention
+- [x] Create Package .json file desribing the project accurately
 - [x] Create initial index.js file (adapting the christie-projector approach
 - [ ] Test on a local instance (Raspberry Pi4) as a local module (how?) against CP4325
 - [ ] Test against multiple Projectors
@@ -31,7 +31,7 @@ This effort is deeply indebted to the work already done for older projectors in 
 
 
 
-## Targeted Projectors
+## Targeted Testing - Projectors
 
 Projector Type | Projector Notes | Testing Outcome
 ---------------|-----------------|----------------
