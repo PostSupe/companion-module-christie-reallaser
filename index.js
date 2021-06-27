@@ -7,6 +7,11 @@ var log;
 
 // Debugging / Logging using ChrRGBLsr not ChristiePj to differentiate our S5 hacks from Std Module
 
+
+
+
+
+
 // Functions to Pad numbers to various depths eg 1 to 001
 
 function pad2(num) {
@@ -49,20 +54,16 @@ instance.prototype.updateConfig = function(config) {
 instance.prototype.init = function() {
 	var self = this;
 
-	debug = self.debug;			// Normal Debug (keep uncommented as default)
-//	debug = console.log;	    // Simple perminent printing of debug options to terminal/CMD
+	debug = self.debug;	    // Normal Debug (keep uncommented as default)
+//	debug = console.log;	    // Simple perminent printing of debug options to terminal/CMD if needed
 	log = self.log;
 
-	self.status(1,'Connecting'); 	// Status ok!
-	self.init_tcp();			     // Init TCP
+	self.status(1,'Connecting'); 	// i.e. Status os OK!
+	self.init_tcp();			 // Init TCP
 	self.update_variables(); 		  // Export Variables
 	self.checkFeedbacks();			   // Export Feedbacks
 	self.init_presets();			    // Export Presets
 };
-
-
-
-// The guts of the thing, lots of IFs for what's needed, starts with establishing comms
 
 
 instance.prototype.init_tcp = function() {
@@ -315,6 +316,17 @@ instance.prototype.init_tcp = function() {
 
 			}
 
+
+			
+			
+			
+// ********************* PROJECTOR COMMANDS ************
+			
+			
+			
+			
+			
+			
 // LPH = LAMP HOURS COMMANDS
 
 			if (data.includes("LPH")) {
@@ -362,7 +374,13 @@ instance.prototype.init_tcp = function() {
 };
 
 
+
+
+
+
+
 // Return config fields for web config
+
 instance.prototype.config_fields = function () {
 	var self = this;
 	return [
@@ -423,9 +441,9 @@ instance.prototype.shutter = [
 ];
 
 
-instance.prototype.tpatRGBLaser = [                        // <--- Our Patterns
-	{ label: 'Off',                            id: '0' },  // Should just use real
-	{ label: 'DC4K Framing2',                  id: '1' },  // names not ID no's?
+/* instance.prototype.tpatRGBLaser = [                        // <--- Our Patterns
+	{ label: 'Off',                            id: '0' },  // assigned to numeric
+	{ label: 'DC4K Framing2',                  id: '1' },  // IDs probably won't work
 	{ label: 'RGB-12bit-MacBeth ColorChecker', id: '2' },
 	{ label: 'RGB-12bit-Color Bars',           id: '3' },
 	{ label: 'RGB-12bit-Color Board',          id: '4' },
@@ -443,12 +461,33 @@ instance.prototype.tpatRGBLaser = [                        // <--- Our Patterns
 	{ label: '-16-not_assigned-',              id: '16'},
 	{ label: '-17-not_assigned-',              id: '17'},
 	{ label: '-18-not_assigned-',              id: '18'}
+]; */
+
+instance.prototype.tpatRGBLaser = [                        // <--- Our Patterns
+	{ label: 'Off',                            id: 'Off' },  // Should just use real
+	{ label: 'Frame with Centre Target',       id: 'DC4K Framing2' },  // names not ID no's?
+	{ label: 'MacBeth Colour Checker',         id: 'RGB-12bit-MacBeth ColorChecker' },
+	{ label: 'Colour Bars',                    id: 'RGB-12bit-Color Bars' },
+	{ label: 'Colour Board Diag',              id: 'RGB-12bit-Color Board' },
+	{ label: 'Full Screen White',              id: 'RGB-12bit-Full Screen White' },
+	{ label: 'DC4K Frame Red LHS',             id: 'DC4K Framing Red' },
+	{ label: 'DC4K Frame Grn RHS',             id: 'DC4K Framing Green' },
+	{ label: '3D Dynamic Range',               id: 'RGB-4K-8bit-3D Dynamic Range' },
+	{ label: '3D Four Quadrant',               id: 'RGB-4K-8bit-3D Four Quadrant' },
+	{ label: '1.85 DC4K Safe Image',           id: 'DC4K Safeimage_185'},
+	{ label: '2.39 DC4K Safe Image',           id: 'DC4K Safeimage_239'},
+	{ label: '-12-not_assigned-',              id: '12'},
+	{ label: '-13-not_assigned-',              id: '13'},
+	{ label: '-14-not_assigned-',              id: '14'},
+	{ label: '-15-not_assigned-',              id: '15'},
+	{ label: '-16-not_assigned-',              id: '16'},
+	{ label: '-17-not_assigned-',              id: '17'},
+	{ label: '-18-not_assigned-',              id: '18'}
 ];
 
 
-
-instance.prototype.chNames = [                        // <--- Channel Names 
-	{ label: 'HiDef',	            id: '0' },
+/* instance.prototype.chNames = [                        // <--- Channel Names 
+	{ label: 'HiDef',	            id: '0' }, // as Numeric IDs 
 	{ label: 'Avid',		        id: '1' },
 	{ label: '3D QuadSDI L (Dual)',	id: '2' },
 	{ label: '3D QuadSDI R (Dual)',	id: '3' },
@@ -459,9 +498,21 @@ instance.prototype.chNames = [                        // <--- Channel Names
 	{ label: '-08-not_assigned-',   id: '8' },
 	{ label: '-09-not_assigned-',   id: '9' },
 	{ label: '-10-not_assigned-',   id: '10'}
+]; */
+
+instance.prototype.chNames = [                        // <--- Channel Names, named 
+	{ label: 'HiDef',	            id: 'HiDef' },
+	{ label: 'Avid',		    id: 'Avid' },
+	{ label: '3D QuadSDI L (Dual)',	    id: '3D QuadSDI L (Dual)' },
+	{ label: '3D QuadSDI R (Dual)',	    id: '3D QuadSDI R (Dual)' },
+	{ label: 'AppleTV',         	    id: 'AppleTV' },
+	{ label: '-05-not_assigned-',       id: '5' },
+	{ label: '-06-not_assigned-',       id: '6' },
+	{ label: '-07-not_assigned-',       id: '7' },
+	{ label: '-08-not_assigned-',       id: '8' },
+	{ label: '-09-not_assigned-',       id: '9' },
+	{ label: '-10-not_assigned-',       id: '10'}
 ];
-
-
 
 
 
