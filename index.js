@@ -103,51 +103,51 @@ instance.prototype.init_tcp = function() {
 			if (data.includes('ERR')) {
 				var data2 = data.substring(data.indexOf('ERR') + 5 ); //changed from 3 as the RGB Lasers use more chars
 
-				if (data2.includes('001')) {
+				if (data2.includes('00001')) {
 					msg = 'System Crash';
 				}
 
-				if (data2.includes('002')) {
+				if (data2.includes('00002')) {
 					msg = 'System Warning';
 				}
 
-				if (data2.includes('003')) {
+				if (data2.includes('00003')) {
 					msg = 'Invalid Parameter';
 				}
 
-				if (data2.includes('004')) {
+				if (data2.includes('00004')) {
 					msg = 'Too Many Parameters';
 				}
 
-				if (data2.includes('005')) {
+				if (data2.includes('00005')) {
 					msg = 'Too Few Parameters';
 				}
 
-				if (data2.includes('006')) {
+				if (data2.includes('00006')) {
 					msg = 'Source Does Not Exist';
 				}
 
-				if (data2.includes('007')) {
+				if (data2.includes('00007')) {
 					msg = 'Could Not Be Executed';
 				}
 
-				if (data2.includes('008')) {
+				if (data2.includes('00008')) {
 					msg = 'Checksum Error';
 				}
 
-				if (data2.includes('009')) {
+				if (data2.includes('00009')) {
 					msg = 'Unknown Request';
 				}
 
-				if (data2.includes('010')) {
+				if (data2.includes('00010')) {
 					msg = 'Communication Error';
 				}
 
-				if (data2.includes('011')) {
+				if (data2.includes('00011')) {
 					msg = 'RX Break';
 				}
 
-				if (data2.includes('012')) {
+				if (data2.includes('00012')) {
 					msg = 'Supplementary Info';
 				}
 
@@ -160,18 +160,18 @@ instance.prototype.init_tcp = function() {
 
 			if (data.includes("FYI")) {                             // Typical packet: '(0002FYI 001 002 003 004 "Some Message")'
 				var split_data = [];
-				var str = data.substring(data.indexOf('FYI') + 3 ); // Striped down to: ' 001 002 003 004 "Some Message")'
+				var str = data.substring(data.indexOf('FYI') + 3 ); // Stripped down to: ' 001 002 003 004 "Some Message")'
 
 				var x = 0;
 				var y = 0;
 
-				// Saves FYI Command
+				// Saves FYI Command contents, iterating thtough the blocks in the message
 				for (let i = 0; i < 4; i++) { 	        // Stripped down to: ' 001 002 003 004 "Some Message")'
-					x = str.indexOf(' ') + 1; 		    // Get first " "
-					y = str.indexOf(' ', 1);			// Get seccond " "
+					x = str.indexOf(' ') + 1;       // Now Get location of the first " "
+					y = str.indexOf(' ', 1);        // Then Get location of the seccond " "
 
 					split_data[i] = str.substring(x, y); // Saves the data between two spaces, with above example '001'
-					str = str.substring(y); 			// Saves the rest for next cycle: ' 002 003 004 "Some Message")'
+					str = str.substring(y); 	     // Saves the rest for next cycle: ' 002 003 004 "Some Message")'
 				}
 
 				// Saves FYI Message
@@ -310,7 +310,8 @@ instance.prototype.init_tcp = function() {
 						// Do something
 						break;
 
-					default:
+					default: // there is no default actin defined for this switch, but lets log it anyway
+						debug('Switch command invoked default - ie it did not work');
 						break;
 				}
 
@@ -327,7 +328,7 @@ instance.prototype.init_tcp = function() {
 			
 			
 			
-// LPH = LAMP HOURS COMMANDS
+// LPH = LAMP HOURS COMMANDS - undsure how this will respond with the Solid State Laser Light Engines...
 
 			if (data.includes("LPH")) {
 				var split_data = [];
@@ -360,7 +361,7 @@ instance.prototype.init_tcp = function() {
 				self.has_data = true;
 			}
 
-			// Migth need some code to request current setup.
+			// Might need some code to request current setup.
 			// For now it should react to changes, but need someone to test to be sure.
 
 			// Initial data from Christie
@@ -441,8 +442,8 @@ instance.prototype.shutter = [
 ];
 
 
-/* instance.prototype.tpatRGBLaser = [                        // <--- Our Patterns
-	{ label: 'Off',                            id: '0' },  // assigned to numeric
+/* instance.prototype.tpatRGBLaser = [                           // <--- Our Patterns
+	{ label: 'Off',                            id: '0' },   // assigned to numeric
 	{ label: 'DC4K Framing2',                  id: '1' },  // IDs probably won't work
 	{ label: 'RGB-12bit-MacBeth ColorChecker', id: '2' },
 	{ label: 'RGB-12bit-Color Bars',           id: '3' },
@@ -463,9 +464,9 @@ instance.prototype.shutter = [
 	{ label: '-18-not_assigned-',              id: '18'}
 ]; */
 
-instance.prototype.tpatRGBLaser = [                        // <--- Our Patterns
-	{ label: 'Off',                            id: 'Off' },  // Should just use real
-	{ label: 'Frame with Centre Target',       id: 'DC4K Framing2' },  // names not ID no's?
+instance.prototype.tpatRGBLaser = [                                          // <--- Our Patterns
+	{ label: 'Off',                            id: 'Off' },             // Should just use real
+	{ label: 'Frame with Centre Target',       id: 'DC4K Framing2' },  // names not no's for IDs I hope
 	{ label: 'MacBeth Colour Checker',         id: 'RGB-12bit-MacBeth ColorChecker' },
 	{ label: 'Colour Bars',                    id: 'RGB-12bit-Color Bars' },
 	{ label: 'Colour Board Diag',              id: 'RGB-12bit-Color Board' },
@@ -553,9 +554,9 @@ instance.prototype.init_presets = function () {
 
 	// ###################### Input Channel ######################
 
-	// Set Input Channel                 // PROBABLY IRRELEVENT NOW
-	for (let i = 0; i < 50; i++) {       // AS PROBABLY JUST USES
-		presets.push({                   // CHANNEL NAMES NOT ID'S?
+	// Set Input Channel                       // PROBABLY IRRELEVENT NOW
+	for (let i = 0; i < 50; i++) {            // AS PROBABLY JUST USES
+		presets.push({                    // CHANNEL NAMES NOT ID'S?
 			category: 'Select Channel',
 			label: 'CH ' + (i+1),
 			bank: {
@@ -648,7 +649,7 @@ instance.prototype.init_presets = function () {
 		});
 	}
 
-	// Shutter Open / Close
+	// Shutter Open / Close i e Douser ************
 	for (var input in self.shutter) {
 		presets.push({
 			category: 'Commands',
@@ -786,7 +787,7 @@ instance.prototype.actions = function(system) {
 
 
 		'itpRGBLaser': {
-			label: 'Internal testpattern RGB Laser Projectors (hacked!)',
+			label: 'Internal Test Pattern RGB Laser Projectors (Hacked!)',
 			options: [
 				{
 					type: 'text',
@@ -797,7 +798,7 @@ instance.prototype.actions = function(system) {
 				},
 				{
 					type: 'dropdown',
-					label: 'Select Testpattern',
+					label: 'Select Test Pattern',
 					id: 'p1',
 					default: '1',
 					choices: self.tpatRGBLaser
